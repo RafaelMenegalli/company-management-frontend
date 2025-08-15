@@ -46,7 +46,7 @@ export function RootLayout({ hideChrome }: Props) {
                     <BreadcrumbList>
                       <BreadcrumbItem>
                         <BreadcrumbLink asChild>
-                          <Link to="/">Home</Link>
+                          <Link to="/dashboard">Dashboard</Link>
                         </BreadcrumbLink>
                       </BreadcrumbItem>
 

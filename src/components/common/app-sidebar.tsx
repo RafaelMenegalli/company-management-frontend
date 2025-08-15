@@ -2,22 +2,15 @@
 
 import * as React from "react"
 import {
-    AudioWaveform,
     BookOpen,
     Bot,
-    Command,
-    Frame,
-    GalleryVerticalEnd,
-    Map,
-    PieChart,
+    FolderPen,
     Settings2,
     SquareTerminal,
 } from "lucide-react"
 
 import { NavMain } from "./nav-main"
-import { NavProjects } from "./nav-projects"
 import { NavUser } from "./nav-user"
-import { TeamSwitcher } from "./team-switcher"
 import {
     Sidebar,
     SidebarContent,
@@ -26,36 +19,77 @@ import {
     SidebarRail,
 } from "@/components/ui/sidebar"
 
-// This is sample data.
+// import { NavProjects } from "./nav-projects"
+
 const data = {
     user: {
         name: "Rafael Menegalli",
         email: "rafaelmenegalli@gmail.com",
         avatar: "/avatars/shadcn.jpg",
     },
-    teams: [
-        {
-            name: "Acme Inc",
-            logo: GalleryVerticalEnd,
-            plan: "Enterprise",
-        },
-        {
-            name: "Acme Corp.",
-            logo: AudioWaveform,
-            plan: "Startup",
-        },
-        {
-            name: "Evil Corp.",
-            logo: Command,
-            plan: "Free",
-        },
-    ],
     navMain: [
         {
-            title: "Todas",
+            title: "Cadastros",
+            url: "#",
+            icon: FolderPen,
+            isActive: true,
+            items: [
+                {
+                    title: "Usuários",
+                    url: "/users",
+                },
+                // {
+                //     title: "Explorer",
+                //     url: "#",
+                // },
+                // {
+                //     title: "Quantum",
+                //     url: "#",
+                // },
+            ],
+        },
+        {
+            title: "Configurações",
+            url: "#",
+            icon: Settings2,
+            items: [
+                {
+                    title: "Geral",
+                    url: "#",
+                },
+                {
+                    title: "Permissões de Usuário",
+                    url: "#",
+                },
+            ],
+        },
+        {
+            title: "Documentação",
+            url: "#",
+            icon: BookOpen,
+            items: [
+                {
+                    title: "Introdução",
+                    url: "#",
+                },
+                {
+                    title: "Cadastros",
+                    url: "#",
+                },
+                {
+                    title: "Relatórios",
+                    url: "#",
+                },
+                {
+                    title: "Dicas",
+                    url: "#",
+                },
+            ],
+        },
+        {
+            title: "Temporário",
             url: "#",
             icon: SquareTerminal,
-            isActive: true,
             items: [
                 {
                     title: "Login",
@@ -71,100 +105,41 @@ const data = {
                 // },
             ],
         },
-        {
-            title: "Cadastros",
-            url: "#",
-            icon: Bot,
-            items: [
-                {
-                    title: "Usuários",
-                    url: "/users/add",
-                },
-                // {
-                //     title: "Explorer",
-                //     url: "#",
-                // },
-                // {
-                //     title: "Quantum",
-                //     url: "#",
-                // },
-            ],
-        },
-        {
-            title: "Documentation",
-            url: "#",
-            icon: BookOpen,
-            items: [
-                {
-                    title: "Introduction",
-                    url: "#",
-                },
-                {
-                    title: "Get Started",
-                    url: "#",
-                },
-                {
-                    title: "Tutorials",
-                    url: "#",
-                },
-                {
-                    title: "Changelog",
-                    url: "#",
-                },
-            ],
-        },
-        {
-            title: "Settings",
-            url: "#",
-            icon: Settings2,
-            items: [
-                {
-                    title: "General",
-                    url: "#",
-                },
-                {
-                    title: "Team",
-                    url: "#",
-                },
-                {
-                    title: "Billing",
-                    url: "#",
-                },
-                {
-                    title: "Limits",
-                    url: "#",
-                },
-            ],
-        },
     ],
-    projects: [
-        {
-            name: "Design Engineering",
-            url: "#",
-            icon: Frame,
-        },
-        {
-            name: "Sales & Marketing",
-            url: "#",
-            icon: PieChart,
-        },
-        {
-            name: "Travel",
-            url: "#",
-            icon: Map,
-        },
-    ],
+
+    // projects: [
+    //     {
+    //         name: "Design Engineering",
+    //         url: "#",
+    //         icon: Frame,
+    //     },
+    //     {
+    //         name: "Sales & Marketing",
+    //         url: "#",
+    //         icon: PieChart,
+    //     },
+    //     {
+    //         name: "Travel",
+    //         url: "#",
+    //         icon: Map,
+    //     },
+    // ],
 }
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
     return (
         <Sidebar collapsible="icon" {...props}>
             <SidebarHeader>
-                <TeamSwitcher teams={data.teams} />
+                <SidebarHeader className="flex items-center gap-2 px-4 py-3">
+                    <Bot className="w-6 h-6 shrink-0" />
+                    <span className="text-lg font-semibold truncate hidden sidebar-expanded:block">
+                        Meu Sistema
+                    </span>
+                </SidebarHeader>
             </SidebarHeader>
             <SidebarContent>
                 <NavMain items={data.navMain} />
-                <NavProjects projects={data.projects} />
+                {/* <NavProjects projects={data.projects} /> */}
             </SidebarContent>
             <SidebarFooter>
                 <NavUser user={data.user} />

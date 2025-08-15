@@ -7,8 +7,8 @@ const LoginPage = () =>
         Component: module.default,
     }));
 
-const AddUserPage = () =>
-    import("@/pages/users/add").then((module) => ({
+const UsersPage = () =>
+    import("@/pages/users").then((module) => ({
         Component: module.default,
     }));
 
@@ -29,8 +29,8 @@ export const router = createBrowserRouter([
         path: "/users",
         element: <RootLayout />,
         children: [
-            { path: "add", lazy: AddUserPage },
+            { path: "", lazy: UsersPage },
         ],
     },
-    { path: "*", element: <Navigate to="/auth/login" replace /> },
+    { path: "*", element: <Navigate to="/" replace /> },
 ]);
