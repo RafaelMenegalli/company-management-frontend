@@ -24,6 +24,7 @@ import {
 } from "@tanstack/react-table";
 import { Eye, EyeOff, MoreVertical, Pencil, Trash2 } from "lucide-react";
 import { useState } from "react";
+import UserAddModal from "./add";
 
 const users: User[] = [
     { name: "João Silva", email: "joao@example.com", password: "senha123" },
@@ -125,17 +126,9 @@ export default function UsersPage() {
     return (
         <Card>
             <div className="px-4 flex flex-col gap-4">
-                {/* <CardHeader>
-                <CardTitle>Usuários</CardTitle>
-                <CardAction>
-                    <Button>Adicionar</Button>
-                </CardAction>
-            </CardHeader> */}
-
                 <div className="flex justify-between gap-4">
                     <SearchInput placeholder="Pesquise por qualquer coisa..." />
-
-                    <Button>Adicionar</Button>
+                    <UserAddModal />
                 </div>
 
                 <div>
