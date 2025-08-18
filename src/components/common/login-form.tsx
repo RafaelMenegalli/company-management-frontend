@@ -11,6 +11,7 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { useNavigate } from "react-router-dom"
 import type { FormEvent } from "react"
+import { PasswordInput } from "./PasswordInput"
 
 export function LoginForm({
     className,
@@ -27,9 +28,9 @@ export function LoginForm({
         <div className={cn("flex flex-col gap-6", className)} {...props}>
             <Card>
                 <CardHeader>
-                    <CardTitle>Login to your account</CardTitle>
+                    <CardTitle>Entre com sua conta</CardTitle>
                     <CardDescription>
-                        Enter your email below to login to your account
+                        Insira seu email abaixo para fazer login
                     </CardDescription>
                 </CardHeader>
                 <CardContent>
@@ -40,37 +41,37 @@ export function LoginForm({
                                 <Input
                                     id="email"
                                     type="email"
-                                    placeholder="m@example.com"
+                                    placeholder="email@gmail.com"
                                     required
                                 />
                             </div>
                             <div className="grid gap-3">
                                 <div className="flex items-center">
-                                    <Label htmlFor="password">Password</Label>
+                                    <Label htmlFor="password">Senha</Label>
                                     <a
                                         href="#"
                                         className="ml-auto inline-block text-sm underline-offset-4 hover:underline"
                                     >
-                                        Forgot your password?
+                                        Esqueceu sua senha?
                                     </a>
                                 </div>
-                                <Input id="password" type="password" required />
+                                <PasswordInput id="password" required />
                             </div>
                             <div className="flex flex-col gap-3">
                                 <Button type="submit" className="w-full">
-                                    Login
+                                    Entrar
                                 </Button>
                                 <Button variant="outline" className="w-full">
-                                    Login with Google
+                                    Entrar com Google
                                 </Button>
                             </div>
                         </div>
-                        <div className="mt-4 text-center text-sm">
-                            Don&apos;t have an account?{" "}
+                        {/* <div className="mt-4 text-center text-sm">
+                            Nao tem uma conta?{" "}
                             <a href="#" className="underline underline-offset-4">
-                                Sign up
+                                Cadastre-se
                             </a>
-                        </div>
+                        </div> */}
                     </form>
                 </CardContent>
             </Card>
