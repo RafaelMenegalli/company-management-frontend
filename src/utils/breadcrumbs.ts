@@ -1,6 +1,7 @@
 // src/utils/breadcrumbs.ts
 export const breadcrumbMap: Record<string, string> = {
-    "/dashboard": "Dashboard",
+    "/dashboard": " ",
     "/users": "Usuários",
+    "/products": "Produtos",
     "/settings": "Configurações",
 }

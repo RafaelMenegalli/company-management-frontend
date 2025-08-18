@@ -2,85 +2,42 @@ import { ConfirmDeleteDialog } from "@/components/common/ConfirmDeleteDialog";
 import { SearchInput } from "@/components/common/SearchInput";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
-import {
-    DropdownMenu,
-    DropdownMenuContent,
-    DropdownMenuItem,
-    DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
-import {
-    Table,
-    TableBody,
-    TableCell,
-    TableHead,
-    TableHeader,
-    TableRow,
-} from "@/components/ui/table";
-import type { User } from "@/types/UserT";
-import {
-    type ColumnDef,
-    flexRender,
-    getCoreRowModel,
-    useReactTable,
-} from "@tanstack/react-table";
-import { Eye, EyeOff, MoreVertical, Pencil } from "lucide-react";
-import { useState } from "react";
-import UserAddModal from "./add";
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
+import type { Product } from "@/types/ProductT";
+import { formatBRL } from "@/utils/formatBRL";
+import { flexRender, getCoreRowModel, useReactTable, type ColumnDef } from "@tanstack/react-table";
+import { MoreVertical, Pencil } from "lucide-react";
+import ProductAddModal from "./add";
 
-const users: User[] = [
-    { name: "João Silva", email: "joao@example.com", password: "senha123" },
-    { name: "Maria Souza", email: "maria@example.com", password: "abcDEF@1" },
-    { name: "Carlos Lima", email: "carlos@example.com", password: "pass@456" },
+const products: Product[] = [
+    { name: "Produto 1", price: 10.99, description: "Descrição do produto 1", stock: 10 },
+    { name: "Produto 2", price: 19.99, description: "Descrição do produto 2", stock: 5 },
+    { name: "Produto 3", price: 29.99, description: "Descrição do produto 3", stock: 20 },
 ]
 
-export default function UsersPage() {
-    const [visiblePasswords, setVisiblePasswords] = useState<Record<number, boolean>>({})
+export default function ProductsPage() {
+    const handleDelete = () => {
+        alert("Excluindo produto")
+    }
 
-    const columns: ColumnDef<User>[] = [
+    const columns: ColumnDef<Product>[] = [
         {
             accessorKey: "name",
             header: "Nome",
-            // cell: ({ getValue }) => <span className="truncate">{getValue() as string}</span>,
-            // size: 200,
         },
         {
-            accessorKey: "email",
-            header: "Email",
-            // cell: ({ getValue }) => <span className="truncate">{getValue() as string}</span>,
-            // size: 250,
+            accessorKey: "price",
+            header: "Preço",
+            cell: ({ row }) => formatBRL(row.getValue("price")),
         },
         {
-            id: "password",
-            header: "Senha",
-            cell: ({ row }) => {
-                const index = row.index
-                const password = row.original.password
-                const isVisible = visiblePasswords[index]
-
-                return (
-                    <div className="flex items-center gap-2">
-                        {isVisible ? (
-                            <span className="font-mono">{password}</span>
-                        ) : (
-                            <span className="text-muted-foreground italic">••••••••</span>
-                        )}
-                        <Button
-                            variant="ghost"
-                            size="icon"
-                            className="h-6 w-6"
-                            onClick={() =>
-                                setVisiblePasswords((prev) => ({
-                                    ...prev,
-                                    [index]: !prev[index],
-                                }))
-                            }
-                        >
-                            {isVisible ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
-                        </Button>
-                    </div>
-                )
-            },
-            size: 150,
+            accessorKey: "description",
+            header: "Descrição",
+        },
+        {
+            accessorKey: "stock",
+            header: "Estoque",
         },
         {
             id: "actions",
@@ -105,7 +62,7 @@ export default function UsersPage() {
                             </DropdownMenuItem>
                             <ConfirmDeleteDialog
                                 itemName={row.original.name}
-                                onConfirm={() => alert(`Excluir ${row.original.name}`)}
+                                onConfirm={handleDelete}
                             />
                         </DropdownMenuContent>
                     </DropdownMenu>
@@ -116,7 +73,7 @@ export default function UsersPage() {
     ]
 
     const table = useReactTable({
-        data: users,
+        data: products,
         columns,
         getCoreRowModel: getCoreRowModel(),
     })
@@ -126,7 +83,7 @@ export default function UsersPage() {
             <div className="px-4 flex flex-col gap-4">
                 <div className="flex justify-between gap-4">
                     <SearchInput placeholder="Pesquise por qualquer coisa..." />
-                    <UserAddModal />
+                    <ProductAddModal />
                 </div>
 
                 <div>

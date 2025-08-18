@@ -37,7 +37,7 @@ export default function UserAddModal() {
 
                         <DialogFooter>
                             <DialogClose asChild>
-                                <Button variant="destructive">Cancelar</Button>
+                                <Button variant="outline">Cancelar</Button>
                             </DialogClose>
                             <Button type="submit">Adicionar</Button>
                         </DialogFooter>
