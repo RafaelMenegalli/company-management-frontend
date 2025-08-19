@@ -1,5 +1,5 @@
 import { Input } from "@/components/ui/input"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 
 interface CurrencyInputProps {
   value: number
@@ -15,6 +15,10 @@ export function CurrencyInput({
   disabled = false,
 }: CurrencyInputProps) {
   const [displayValue, setDisplayValue] = useState(formatCurrency(value))
+
+  useEffect(() => {
+    setDisplayValue(formatCurrency(value))
+  }, [value])
 
   // Formata o número para "1.234,56"
   function formatCurrency(amount: number): string {

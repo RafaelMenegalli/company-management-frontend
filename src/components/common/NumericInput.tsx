@@ -1,5 +1,5 @@
 import { Input } from "@/components/ui/input"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 
 interface NumericInputProps {
   value: number
@@ -17,6 +17,10 @@ export function NumericInput({
   allowDecimal = false,
 }: NumericInputProps) {
   const [displayValue, setDisplayValue] = useState(() => formatNumber(value))
+
+  useEffect(() => {
+    setDisplayValue(formatNumber(value))
+  }, [value])
 
   // Formata valor number para string
   function formatNumber(val: number) {
